@@ -1,0 +1,88 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog title="User Registeration">
+        <content>
+            <l:Grid defaultSpan = "L12 M12 S12" width = "auto">
+                <l:content>
+                    <f:Form editable="true">
+                        <f:layout>
+                            <f:ResponsiveGridLayout
+                                labelSpanXL="3"
+                                labelSpanL="3"
+                                labelSpanM="3"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="3"
+                                emptySpanL="3"
+                                emptySpanM="3"
+                                emptySpanS="0"
+                                columnsXL="1"
+                                columnsL="1"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                        </f:layout>
+                        <f:formContainers>
+                            <f:FormContainer>
+                                <f:formElements>
+                                    <f:FormElement label="First Name">
+                                      <Input id="Fname" type="Text"/>
+                                    </f:FormElement>
+
+                                    <f:FormElement label="Middle Name">
+                                       <Input id="MName" type="Text"/>
+                                    </f:FormElement>
+
+                                    <f:FormElement label="Last Name">
+                                        <Input id="LName" type="Text"/>
+                                    </f:FormElement>
+
+                                    <f:FormElement label="User Name">
+                                        <Input id="UserName" type="Text"/>
+                                    </f:FormElement>
+
+                                    <f:FormElement label="Password">
+                                        <Input id="oPassword" type="Password"/>
+                                    </f:FormElement>
+
+                                     <f:FormElement label="Email Address">
+                                        <Input id="EmailAdd" type="Email"/>
+                                    </f:FormElement>
+
+                                    <f:FormElement label="House No">
+                                        <Input id="oHouseNo" type="Text"/>
+                                    </f:FormElement>
+
+                                    <f:FormElement label="Street">
+                                        <Input id="oStreet" type="Text"/>
+                                    </f:FormElement>
+
+                                     <f:FormElement label="Brgy">
+                                        <Input id="oBrgy" type="Text"/>
+                                    </f:FormElement>
+
+                                      <f:FormElement label="City">
+                                        <Input id="oCity" type="Text"/>
+                                    </f:FormElement>
+
+                                    <f:FormElement label="Province">
+                                        <Input id="oProvince" type="Text"/>
+                                    </f:FormElement>
+
+                                </f:formElements>
+                            </f:FormContainer>
+                        </f:formContainers>
+                    </f:Form>
+                </l:content>
+            </l:Grid>
+        </content>
+        <beginButton>
+            <Button text="Cancel" icon="sap-icon://sys-cancel" press="onCloseRegistration" type="Reject"/>
+        </beginButton>
+        <endButton>
+            <Button text="Register" icon="sap-icon://accept" press="onRegister" type="Accept" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

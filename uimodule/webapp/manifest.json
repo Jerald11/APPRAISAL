@@ -1,0 +1,202 @@
+{
+  "_version": "1.12.0",
+  "sap.app": {
+    "id": "claims.Entrego",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}"
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "claims.Entrego.view.login",
+      "type": "XML",
+      "async": true,
+      "id": "idAppControl"
+    },
+    "dependencies": {
+      "minUI5Version": "1.60.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "claims.Entrego.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "claims.Entrego.view",
+        "controlId": "idAppControl",
+        "controlAggregation": "pages",
+        "async": true
+      },
+      "routes": [
+        {
+          "name": "Routelogin",
+          "pattern": "Routelogin",
+          "target": ["Targetlogin"]
+        },
+        {
+          "name": "Main",
+          "pattern": "Main",
+          "target": ["Main"]
+        },
+        {
+          "name": "MainDashBoard",
+          "pattern": "DashBoard",
+          "target": ["MainDashBoard"]
+        },
+        {
+          "name": "CustomerDashBoard",
+          "pattern": "EmployeeSales",
+          "target": ["CustomerDashBoard"]
+        },
+        {
+          "name": "ViewInventory",
+          "pattern": "ViewInventory",
+          "target": ["ViewInventory"]
+        },
+        {
+          "name": "Customer",
+          "pattern": "Employee",
+          "target": ["Customer"]
+        },
+        {
+          "name": "ProductSales",
+          "pattern": "ProductSales",
+          "target": ["ProductSales"]
+        },
+        {
+          "name": "Orders",
+          "pattern": "MyOrder",
+          "target": ["Orders"]
+        },
+        {
+          "name": "Approver",
+          "pattern": "Attachment",
+          "target": ["Approver"]
+        }
+      ],
+      "targets": {
+        "Targetlogin": {
+          "viewType": "XML",
+          "viewLevel": 1,
+          "viewName": "login"
+        },
+        "Main": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewLevel": 1,
+          "viewName": "Main",
+          "transition": "fade"
+				},
+        "Customer": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewLevel": 1,
+          "viewName": "Customer",
+          "transition": "fade"
+				},
+        "MainDashBoard": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewName": "MainDashBoard",
+          "parent": "Main",
+          "controlId": "pageContainer",
+          "controlAggregation": "pages",
+          "viewLevel": 3,
+          "transition": "fade"
+        },
+        "CustomerDashBoard": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewName": "CustomerDashBoard",
+          "parent": "Customer",
+          "controlId": "pageContainerCustomer",
+          "controlAggregation": "pages",
+          "viewLevel": 3,
+          "transition": "fade"
+        },
+        "ViewInventory": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewName": "ViewInventory",
+          "parent": "Main",
+          "controlId": "pageContainer",
+          "controlAggregation": "pages",
+          "viewLevel": 3,
+          "transition": "fade"
+        },
+        "Orders": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewName": "Orders",
+          "parent": "Customer",
+          "controlId": "pageContainerCustomer",
+          "controlAggregation": "pages",
+          "viewLevel": 3,
+          "transition": "fade"
+        },
+        "ProductSales": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewName": "ProductSales",
+          "parent": "Customer",
+          "controlId": "pageContainerCustomer",
+          "controlAggregation": "pages",
+          "viewLevel": 3,
+          "transition": "fade"
+        },
+        "Approver": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewName": "Approver",
+          "parent": "Main",
+          "controlId": "pageContainer",
+          "controlAggregation": "pages",
+          "viewLevel": 3,
+          "transition": "fade"
+        }
+      }
+    }
+  }
+}
