@@ -1,0 +1,108 @@
+<mvc:View controllerName="claims.Entrego.view.CustomerDashBoard"
+xmlns:core="sap.ui.core"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m"
+xmlns:f="sap.f"
+xmlns:l="sap.ui.layout"
+xmlns:html="http://www.w3.org/1999/xhtml">
+<App id="CustomerDashBoard" >
+<Page showHeader="false" class="SAPFioriBody">
+ <IconTabBar id="iddash" headerMode="Inline" class="SAPFiori">
+   <items class="SAPFiori">
+
+     <IconTabFilter id="AdminTab" visible="true" class="SAPFiori" text="Home" key="Administrator">
+       <content class="SAPFiori">
+
+         <SlideTile class="sapUiTinyMarginBegin">
+           <GenericTile
+             backgroundImage="resources/img/img1.jpg"
+             frameType="TwoByOne">
+             <TileContent unit="" footer="">
+             </TileContent>
+           </GenericTile>
+
+           <GenericTile
+           backgroundImage="resources/img/img2.jpg"
+             frameType="TwoByOne" press="press">
+             <TileContent unit="" footer=""/>
+           </GenericTile>
+
+           <GenericTile
+            backgroundImage="resources/img/img3.jpg"
+              frameType="TwoByOne" press="press">
+              <TileContent unit="" footer="">
+              </TileContent>
+            </GenericTile>
+
+            <GenericTile
+            backgroundImage="resources/img/img4.jpg"
+            frameType="TwoByOne">
+            <TileContent unit="" footer="">
+            </TileContent>
+          </GenericTile>
+
+          <GenericTile
+          backgroundImage="resources/img/img5.png"
+            frameType="TwoByOne" press="press">
+            <TileContent unit="" footer="">
+
+            </TileContent>
+          </GenericTile>
+
+          </SlideTile>
+
+         <SlideTile class="sapUiTinyMarginBegin">
+        
+           <GenericTile backgroundImage="resources/img/img6.jpg" frameType="TwoByOne" press="press">
+             <TileContent unit="" footer=""/>
+           </GenericTile>
+
+           <GenericTile backgroundImage="resources/img/img7.png" frameType="TwoByOne" press="press">
+            <TileContent unit="" footer=""/>
+          </GenericTile>
+
+          <GenericTile backgroundImage="resources/img/img8.jpg" frameType="TwoByOne" press="press">
+            <TileContent unit="" footer=""/>
+          </GenericTile>
+
+          <GenericTile backgroundImage="resources/img/img9.jpg" frameType="TwoByOne" press="press">
+            <TileContent unit="" footer=""/>
+          </GenericTile>
+
+          <GenericTile backgroundImage="resources/img/img10.jpg" frameType="TwoByOne" press="press">
+            <TileContent unit="" footer=""/>
+          </GenericTile>
+
+         </SlideTile>
+
+         <SlideTile class="sapUiTinyMarginBegin">
+        
+          <GenericTile backgroundImage="resources/img/img11.jpg" frameType="TwoByOne" press="press">
+            <TileContent unit="" footer=""/>
+          </GenericTile>
+
+          <GenericTile backgroundImage="resources/img/img12.jpg" frameType="TwoByOne" press="press">
+           <TileContent unit="" footer=""/>
+         </GenericTile>
+
+         <GenericTile backgroundImage="resources/img/img13.jpg" frameType="TwoByOne" press="press">
+           <TileContent unit="" footer=""/>
+         </GenericTile>
+
+         <GenericTile backgroundImage="resources/img/img14.jpg" frameType="TwoByOne" press="press">
+           <TileContent unit="" footer=""/>
+         </GenericTile>
+
+         <GenericTile backgroundImage="resources/img/img15.jpg" frameType="TwoByOne" press="press">
+           <TileContent unit="" footer=""/>
+         </GenericTile>
+
+        </SlideTile>
+       </content>
+     </IconTabFilter>
+
+   </items>
+ </IconTabBar>
+</Page>
+</App>
+</mvc:View>

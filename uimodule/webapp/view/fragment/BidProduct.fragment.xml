@@ -1,0 +1,29 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog id="bViewProdId" title="">
+        <content>
+            <HBox justifyContent="Center" renderType="Bare">
+                <Panel id="carouselContainer" height="400px">
+                    <Carousel class="sapUiContentPadding" loop="true">
+                        <Image id="BTopImageIdFrag"/>
+                        <Image id="BFrontImageIdFrag"/>
+                        <Image id="BRearImageIdFrag"/>
+                    </Carousel>
+                </Panel>
+            </HBox>
+
+            <VBox justifyContent="Center" renderType="Bare">
+                <Input id="BidAmountID" type="Number" placeholder="Enter Bid Amount" width="100%"/>
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="Close" icon="sap-icon://sys-cancel" press="onCloseProduct" type="Reject"/>
+        </beginButton>
+        <endButton>
+            <Button text="Bid now" icon="sap-icon://accept" press="onOrderedItem" type="Accept" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

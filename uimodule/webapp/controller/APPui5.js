@@ -15,7 +15,7 @@ sap.ui.define([
 	"use strict";
 
 	return ("claims.entrego.controller.APPui5", {
-		onPrompt: function (title, message) {
+    onPrompt: function (title, message) {
 			return new Promise(function (resolve, reject) {
 				sap.m.MessageBox.confirm(message, {
 					icon: MessageBox.Icon.CONFIRMATION,
@@ -37,6 +37,12 @@ sap.ui.define([
 			var year = new Date(sDate).getYear() + 1900;
 			var month = new Date(sDate).getMonth() + 1;
 			var date = new Date(sDate).getDate();
+      var Dig = this.getlength(date);
+      if(Dig === 1){
+        date = "0" +  date;
+      }else{
+        date = date;
+      }
 			return month + "/" + date + "/" + year;
 		},
 		getDateFormat: function (sDate) {
@@ -47,6 +53,16 @@ sap.ui.define([
 			}
 			var date = new Date(sDate).getDate();
 			return date + "/" + month + "/" + year;
+		},
+
+    getCurrentYear: function () {
+			var year = new Date().getYear() + 1900;
+			return year;
+		},
+
+    getCurrentDay: function () {
+			var days = new Date().getDate();
+			return days;
 		},
 
     toCommas:function (value) {
@@ -60,61 +76,19 @@ sap.ui.define([
       return str;
     },
 
+  
+  openLoadingFragment: function(){
+    if (! this.oDialog) {
+          this.oDialog = sap.ui.xmlfragment("busyLogin","WEBAP.RFID.view.fragments.BusyDialog", this);
+     }
+     this.oDialog.open();
+  },
 
-    formatAMPM: function(date) {
-      var hours = date.getHours() + 1;
-      var minutes = date.getMinutes();
-      var ampm = hours >= 12 ? 'pm' : 'am';
-      hours = hours % 12;
-      hours = hours ? hours : 12; // the hour '0' should be '12'
-      minutes = minutes < 10 ? '0'+minutes : minutes;
-      var strTime = hours + ':' + minutes + ' ' + ampm;
-      return strTime;
-    },
-
-
-    loadAIP: function(){
-      var oBody = [];
-      oBody.push({
-        "server":localStorage.getItem("RFID_DBServer"),
-        "dbpassword": localStorage.getItem("RFID_DBPassword"),
-        "dbuser": localStorage.getItem("RFID_DBUser"),
-        "dbase": localStorage.getItem("RFID_DBName")
-      })
-
-      var that = this;
-      var sServerName = localStorage.getItem("RFID_Server");
-      var sUrl = sServerName + "/ENV";
-      var setting = {
-        "url": sUrl,
-        "method": "POST",
-        "timeout": 0,
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "data": JSON.stringify(oBody),
-      };
-
-      $.ajax(setting).done(function (response) {
-        // console.log(response)
-      });
-      // that.ongetCompany();
-    },
-
-    openLoadingFragment: function(){
-      if (! this.oDialog) {
-            this.oDialog = sap.ui.xmlfragment("busyLogin","claims.Entrego.view.fragment.BusyDialog", this);
-       }
-       this.oDialog.open();
-    },
-
-    closeLoadingFragment : function(){
+  closeLoadingFragment : function(){
       if(this.oDialog){
         this.oDialog.close();
       }
-    },
-
-
+  },
 
   hex2bin: function (hex){
       hex = hex.replace("0x", "").toLowerCase();
@@ -188,101 +162,396 @@ sap.ui.define([
     }, 0);
   },
 
+  Timeformater: function(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours < 10 ? '0'+hours : hours;
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    seconds = seconds < 10 ? '0'+seconds : seconds;
+    
+    var strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+    return strTime;
+  },
 
-
-  CSVToArray: function( strData, strDelimiter ){
-		// Check to see if the delimiter is defined. If not,
-		// then default to comma.
-		strDelimiter = (strDelimiter || ",");
-
-		// Create a regular expression to parse the CSV values.
-		var objPattern = new RegExp(
-			(
-				// Delimiters.
-				"(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
-
-				// Quoted fields.
-				"(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
-
-				// Standard fields.
-				"([^\"\\" + strDelimiter + "\\r\\n]*))"
-			),
-			"gi"
-			);
-
-
-		// Create an array to hold our data. Give the array
-		// a default empty first row.
-		var arrData = [[]];
-
-		// Create an array to hold our individual pattern
-		// matching groups.
-		var arrMatches = null;
-
-
-		// Keep looping over the regular expression matches
-		// until we can no longer find a match.
-		while (arrMatches = objPattern.exec( strData )){
-
-			// Get the delimiter that was found.
-			var strMatchedDelimiter = arrMatches[ 1 ];
-
-			// Check to see if the given delimiter has a length
-			// (is not the start of string) and if it matches
-			// field delimiter. If id does not, then we know
-			// that this delimiter is a row delimiter.
-			if (
-				strMatchedDelimiter.length &&
-				(strMatchedDelimiter != strDelimiter)
-				){
-
-				// Since we have reached a new row of data,
-				// add an empty row to our data array.
-				arrData.push( [] );
-
-			}
-
-
-			// Now that we have our delimiter out of the way,
-			// let's check to see which kind of value we
-			// captured (quoted or unquoted).
-			if (arrMatches[ 2 ]){
-
-				// We found a quoted value. When we capture
-				// this value, unescape any double quotes.
-				var strMatchedValue = arrMatches[ 2 ].replace(
-					new RegExp( "\"\"", "g" ),
-					"\""
-					);
-
-			} else {
-
-				// We found a non-quoted value.
-				var strMatchedValue = arrMatches[ 3 ];
-
-			}
-
-
-			// Now that we have our value string, let's add
-			// it to the data array.
-			arrData[ arrData.length - 1 ].push( strMatchedValue );
-		}
-
-		// Return the parsed data.
-		return( arrData );
-	},
-
-   Timeformater: function(date) {
+  PostDTRformat: function(date) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours < 10 ? '0'+hours : hours;
     minutes = minutes < 10 ? '0'+minutes : minutes;
+    
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
+  }, 
+
+  ContainsNumber:function (_string){
+    let matchPattern =_string.match(/\d+/g);
+    if (matchPattern != null) {
+      return true;
+    }
+    else{
+     return false;
+    }
   },
 
+  zeroPad: function (num, places) {
+    var zero = places - num.toString().length + 1;
+    return Array(+(zero > 0 && zero)).join("0") + num;
+    },
 
+    containsSpecialChars: function(str) {
+      const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+      return specialChars.test(str);
+    },
+  
+    checkUppercase: function(str){
+      for (var i=0; i<str.length; i++){
+        if (str.charAt(i) == str.charAt(i).toUpperCase() && str.charAt(i).match(/[a-z]/i)){
+          return true;
+        }
+      }
+      return false;
+    },
+  
+    checkLowercase:function(str){
+      for (var i=0; i<str.length; i++){
+        if (str.charAt(i) == str.charAt(i).toLowerCase() && str.charAt(i).match(/[a-z]/i)){
+          return true;
+        }
+      }
+      return false;
+    },
+  
+    onRound: function (value, precision) {
+			return (+(Math.round(value + "e+" + precision) + "e-" + precision)) || 0;
+		},
+  
+
+    ExecQuery: function (sQueryTag, sRootModel, sV1 = "", sV2 = "", sV3 = "", sV4 = "", isAsync = false) {
+      var busyDialog = new sap.m.BusyDialog();
+      busyDialog.open();
+
+      var fetchValue = "";
+      var isAsyncParam = isAsync;
+      var myURL =  "http://13.251.57.230/APPQuery?querytag=" + sQueryTag + "&value1=" + sV1 + "&value2=" + sV2 + "&value3=" + sV3 + "&value4=" + sV4;
+      // console.log(myURL)
+      $.ajax({
+        url: myURL,
+        type: "GET",
+        contentType: "application/json",
+        datatype: "json",
+        async: isAsyncParam,
+        context: this,
+        error: function (xhr, status, error) {
+          console.log(error);
+          busyDialog.close();
+        },
+        success: function (results) {
+          
+        },
+      }).done(function (results) {
+        if (results) {
+          if (sRootModel === "") {
+            fetchValue = JSON.parse(JSON.stringify(results).replace("[", "").replace("]", ""));
+          } else {
+            if (sRootModel === 'DataRecord') {
+              fetchValue = JSON.parse(JSON.stringify(results).replace("[", "").replace("]", ""));
+            } else {
+              fetchValue = results;
+            }
+          }
+        }
+        busyDialog.close();
+      });
+      return fetchValue;
+    },
+
+     convertTo24Hour:function(time) {
+      var hours = parseInt(time.substr(0, 2));
+      if(time.indexOf('AM') != -1 && hours == 12) {
+          time = time.replace('12', '00');
+      }
+
+      if(time.indexOf('am') != -1 && hours == 12) {
+        time = time.replace('12', '00');
+      }
+
+      if(time.indexOf('PM')  != -1 && hours < 12) {
+          time = time.replace(hours, (hours + 12));
+      }
+
+      if(time.indexOf('pm')  != -1 && hours < 12) {
+        time = time.replace(hours, (hours + 12));
+    }
+      return time.replace(/(AM|PM)/, '');
+    },
+
+    postQuery: async function (oData, table, description) {
+      return new Promise(function (resolve, reject) {
+        var busyDialog = new sap.m.BusyDialog();
+        busyDialog.open();
+
+      var url = "http://13.251.57.230/APPPostQuery";
+      var settings = {
+        "url": url,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify(oData),
+        };
+        
+        $.ajax(settings)
+        .error(function (xhr, status, error) {
+          console.log("Error");
+          busyDialog.close();
+          resolve(error);
+        })
+        .done(function (response) {
+          console.log("Posted");
+          busyDialog.close();
+          resolve(0);
+        });
+      });
+    },
+
+
+    Login: async function (path) {
+      return new Promise(function (resolve, reject) {
+      var busyDialog = new sap.m.BusyDialog();
+      busyDialog.open();
+
+      var url = "http://13.251.57.230/" + path;
+      var settings = {
+        "url": url,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      };
+        
+        $.ajax(settings)
+        .error(function (xhr, status, error) {
+          console.log("Error");
+          busyDialog.close();
+          resolve("Error");
+        })
+        .done(function (response) {
+          busyDialog.close();
+          resolve(response);
+        });
+      });
+    },
+
+    days_between: function(StartDate, EndDate) {
+      const oneDay = 1000 * 60 * 60 * 24;
+      const start = Date.UTC(new Date(EndDate).getYear(), new Date(EndDate).getMonth(), new Date(EndDate).getDate());
+      const end = Date.UTC(new Date(StartDate).getYear(), new Date(StartDate).getMonth(), new Date(StartDate).getDate());
+      return (end - start) / oneDay;
+    },
+
+    getDayName: function(){
+      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      var d = new Date();
+      var dayName = days[d.getDay()]  
+      return dayName; 
+    },
+
+    getDayNameShort: function(){
+      var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      var d = new Date();
+      var dayName = days[d.getDay()]  
+      return dayName; 
+    },
+
+
+    getCurentMonth: function(){
+      const month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+      const d = new Date();
+      let name = month[d.getMonth()];
+      return name;
+    },
+
+    getMonth: function(){
+      const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+      const d = new Date();
+      let name = month[d.getMonth()];
+      return name;
+    },
+
+    convertJavaTime: function(time){
+      var conTime = this.convertAllHour(time);    
+      // "(Philippine Standard Time)"
+      conTime = conTime + ":00";
+      var output =  " " + this.getDayNameShort() + " " + this.getCurentMonth() + " " + this.getTimeout(new Date()) + " " + conTime + " GMT+0800 (Philippine Standard Time)";
+    
+      return output;
+      // Wed Oct 12 2022 17:40:56 GMT+0800 (Philippine Standard Time)
+    },
+
+    getTimeout: function (sDate) {
+			var year = new Date(sDate).getYear() + 1900;
+			var month = new Date(sDate).getMonth() + 1;
+			if (month<10){
+				month="0" + month;
+			}
+			var date = new Date(sDate).getDate();
+			return  date + " " + year;
+		},
+
+    computeTimeDif: function(start,end){
+      if(start === "12:00 AM" || start === "12:00 am"){
+        start = 0;
+      }else{
+        start = this.convertAllHour(start);
+        start = start.replace(":", "");
+        start = start.replace(" ", "");
+        start = start.replace("am", "");
+        start = start.replace("pm", "");
+        start = start.replace("AM", "");
+        start = start.replace("PM", "");
+      }
+      
+
+      if(start.length === 5){
+        start = start.slice(1);
+      }
+
+      end = this.convertAllHour(end);
+      end = end.replace(":", "");
+      end = end.replace(" ", "");
+      end = end.replace("am", "");
+      end = end.replace("pm", "");
+      end = end.replace("AM", "");
+      end = end.replace("PM", "");
+    
+    
+      if(end.length === 5){
+        end = end.slice(1);
+      }
+      var time = end - start;
+      var fTime = "";
+      var Dig = this.getlength(time);
+      if(Dig === 2){
+        fTime = "0" + "." + time;
+      }else{
+        var digit1 = time.toString().substring(0, 2);
+        var digit2 = time.toString().substring(2, 3);
+        fTime = digit1 + "." + digit2;
+      }
+
+      return this.onRound(fTime,2);
+    },
+ 
+    convertAllHour:function(time) {
+      var getdigit = time.substr(0, 2);
+      var hours = parseInt(getdigit);
+      if(time.indexOf('AM') != -1 && hours == 12) {
+          time = time.replace('12', '12');
+      }
+
+      if(time.indexOf('am') != -1 && hours == 12) {
+        time = time.replace('12', '12');
+      }
+
+      if(time.indexOf('PM')  != -1 && hours < 12) {
+          time = time.replace(hours, (hours + 12));
+      }
+
+      if(time.indexOf('pm')  != -1 && hours < 12) {
+        time = time.replace(hours, (hours + 12));
+    }
+
+    time =time.replace(/(AM|PM)/, '');
+    time = time.replace(/(am|pm)/, '');
+    time = time.replace(' ', '');
+    // time = time.slice(1);
+      return time;
+    },
+
+
+    getlength: function (number) {
+      return number.toString().length;
+    },
+    
+    getNumberofWeek: function(){
+      currentDate = new Date();
+      startDate = new Date(currentDate.getFullYear(), 0, 1);
+      var days = Math.floor((currentDate - startDate) /(24 * 60 * 60 * 1000));
+         
+      return weekNumber = Math.ceil(days / 7);
+    },
+
+    generateIDKey:function() {
+      var length = 8,
+        charset = "123141erterertxgdfgwerabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+      for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+      }
+      return retVal;
+      },
+
+
+      postEmail: async function (oData) {
+        return new Promise(function (resolve, reject) {
+        var url = "http://13.251.57.230/EmailNotification";
+        var settings = {
+          "url": url,
+          "method": "POST",
+          "timeout": 0,
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "data": JSON.stringify(oData),
+          };
+          
+          $.ajax(settings)
+          .error(function (xhr, status, error) {
+            console.log("Error");
+            resolve(error);
+          })
+          .done(function (response) {
+          console.log("Posted");
+          resolve(0);
+          });
+        });
+        },
+
+
+        onUploadFile: async function(form,v1,v2,v3){
+          return new Promise(function (resolve, reject) {
+            var settings = {
+            "url": "http://13.251.57.230/uploadImge",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": form
+            };
+          
+            $.ajax(settings)
+            .error(function (error){
+              console.log(error)
+              reject(error);
+            }).done(function (response) {				
+              var oResult = JSON.parse(response);
+              resolve(oResult.profile_url);
+            });
+      
+          });
+        },
+    
 	});
 });

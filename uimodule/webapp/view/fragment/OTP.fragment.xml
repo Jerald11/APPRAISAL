@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog title="One Time Password">
+        <content>
+            <Panel xmlns="sap.m" class="sapUiResponsiveContentPadding" width="auto" expandable="false" expanded="true">	
+                <Input visible="true" id="OTPR" placeholder="Enter OTP Code"/>
+                <Input visible="false" showValueHelp="true" valueHelpRequest="onShowNewPw" id="NPassword" type="Password" placeholder="Enter Password"/>
+                <Input visible="false" showValueHelp="true" valueHelpRequest="onShowConPw" id="CPassword" type="Password" placeholder="Enter Confirm Password"/>
+            </Panel>
+        </content>
+        <beginButton>
+            <Button text="Cancel" icon="sap-icon://sys-cancel" press="onCloseOTP" type="Reject"/>
+        </beginButton>
+        <endButton>
+            <Button id="OTPButton" text="Enter" icon="sap-icon://accept" press="onCheckOTP" type="Accept" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

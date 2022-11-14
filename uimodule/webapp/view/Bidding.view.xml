@@ -1,0 +1,35 @@
+<mvc:View controllerName="claims.Entrego.view.Bidding"
+xmlns:core="sap.ui.core"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m"
+xmlns:f="sap.ui.layout.form" 
+xmlns:l="sap.ui.layout"
+xmlns:u="sap.ui.unified"
+xmlns:html="http://www.w3.org/1999/xhtml">
+    <App id="Bidding" >
+        <Page showHeader="false" enableScrolling="true" class="page2BgImg">
+            <List
+            items="{oModel>/DataRecords}"
+            headerText="Bidding Jewelry">
+            <ObjectListItem
+                title="{oModel>Description}"
+                type="Active"
+                press="onShowProduct"
+                number="{oModel>Price}"
+                numberUnit="{oModel>CurrencyCode}"
+                icon="http://13.251.57.230/Images/{oModel>Img2}">
+                <firstStatus>
+                    <ObjectStatus
+                        text="{oModel>Status}"
+                        state="{oModel>InfoStateName}"
+                        inverted="true" />
+                </firstStatus>
+                <ObjectAttribute text="Value: {oModel>AValue}"/>
+                <ObjectAttribute text="Category: {oModel>Category}"/>
+                <ObjectAttribute text="Min Bid Amount: {oModel>MinBid}"/>
+                <ObjectAttribute text="Max Bid Amount: {oModel>MaxBid}" />
+            </ObjectListItem>
+        </List>
+        </Page>
+    </App>
+</mvc:View>

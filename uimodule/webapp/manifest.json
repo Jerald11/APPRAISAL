@@ -31,7 +31,7 @@
       "viewName": "claims.Entrego.view.login",
       "type": "XML",
       "async": true,
-      "id": "idAppControl"
+      "id": "app"
     },
     "dependencies": {
       "minUI5Version": "1.60.0",
@@ -65,7 +65,7 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "viewPath": "claims.Entrego.view",
-        "controlId": "idAppControl",
+        "controlId": "app",
         "controlAggregation": "pages",
         "async": true
       },
@@ -76,9 +76,44 @@
           "target": ["Targetlogin"]
         },
         {
+          "name": "Product",
+          "pattern": "Product",
+          "target": ["Product"]
+        },
+        {
+          "name": "SalesProduct",
+          "pattern": "SalesProduct",
+          "target": ["SalesProduct"]
+        },
+        {
+          "name": "MyOrderSales",
+          "pattern": "MyOrderSales",
+          "target": ["MyOrderSales"]
+        },
+        {
+          "name": "myOrderBid",
+          "pattern": "myOrderBid",
+          "target": ["myOrderBid"]
+        },
+        {
+          "name": "Bidding",
+          "pattern": "Bidding",
+          "target": ["Bidding"]
+        },
+        {
           "name": "Main",
           "pattern": "Main",
           "target": ["Main"]
+        },
+        {
+          "name": "Customer",
+          "pattern": "Customer",
+          "target": ["Customer"]
+        },
+        {
+          "name": "Appraise",
+          "pattern": "Appraise",
+          "target": ["Appraise"]
         },
         {
           "name": "MainDashBoard",
@@ -87,7 +122,7 @@
         },
         {
           "name": "CustomerDashBoard",
-          "pattern": "EmployeeSales",
+          "pattern": "CustomerDashBoard",
           "target": ["CustomerDashBoard"]
         },
         {
@@ -151,7 +186,48 @@
           "viewType": "XML",
           "viewName": "CustomerDashBoard",
           "parent": "Customer",
-          "controlId": "pageContainerCustomer",
+          "controlId": "pageContainer1",
+          "controlAggregation": "pages",
+          "viewLevel": 3,
+          "transition": "fade"
+        },
+        "SalesProduct": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewName": "SalesProduct",
+          "parent": "Customer",
+          "controlId": "pageContainer1",
+          "controlAggregation": "pages",
+          "viewLevel": 3,
+          "transition": "fade"
+        },
+        "MyOrderSales": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewName": "MyOrderSales",
+          "parent": "Customer",
+          "controlId": "pageContainer1",
+          "controlAggregation": "pages",
+          "viewLevel": 3,
+          "transition": "fade"
+        },
+        "myOrderBid": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewName": "myOrderBid",
+          "parent": "Customer",
+          "controlId": "pageContainer1",
+          "controlAggregation": "pages",
+          "viewLevel": 3,
+          "transition": "fade"
+        },
+
+        "Bidding": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewName": "Bidding",
+          "parent": "Customer",
+          "controlId": "pageContainer1",
           "controlAggregation": "pages",
           "viewLevel": 3,
           "transition": "fade"
@@ -195,7 +271,28 @@
           "controlAggregation": "pages",
           "viewLevel": 3,
           "transition": "fade"
+        },
+        "Appraise": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewName": "Appraise",
+          "parent": "Main",
+          "controlId": "pageContainer",
+          "controlAggregation": "pages",
+          "viewLevel": 3,
+          "transition": "fade"
+        },
+        "Product": {
+          "viewPath": "claims.Entrego.view",
+          "viewType": "XML",
+          "viewName": "Product",
+          "parent": "Main",
+          "controlId": "pageContainer",
+          "controlAggregation": "pages",
+          "viewLevel": 3,
+          "transition": "fade"
         }
+
       }
     }
   }

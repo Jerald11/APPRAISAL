@@ -3,5 +3,7 @@
  "UploadData": [],
  "Ordered": [],
  "Paid": [],
- "Rejected": []
+ "Rejected": [],
+ "DataRecords": [],
+ "DataRecord": {}
 }

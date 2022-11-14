@@ -1,0 +1,44 @@
+<mvc:View controllerName="claims.Entrego.view.Appraise"
+xmlns:core="sap.ui.core"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m"
+xmlns:f="sap.ui.layout.form" 
+xmlns:l="sap.ui.layout"
+xmlns:u="sap.ui.unified"
+xmlns:html="http://www.w3.org/1999/xhtml">
+    <App id="appraisal" >
+        <Page showHeader="false" enableScrolling="true" class="page2BgImg">
+            <HBox justifyContent="Center" renderType="Bare">
+                <Panel id="carouselContainer" height="400px">
+                    <Carousel class="sapUiContentPadding" loop="true">
+                        <Image id="TopImageId" src="./resources/img/template.jpg" alt="Top"/>
+                        <Image id="FrontImageID" src="./resources/img/template.jpg" alt="Front" />
+                        <Image id="RearImageID" src="./resources/img/template.jpg" alt="Rear" />
+                    </Carousel>
+                </Panel>
+            </HBox>
+    
+            <HBox justifyContent="Center" renderType="Bare">
+                <u:FileUploader buttonOnly="true" change="onUploadTop" buttonText="Top Image"/>  
+                <u:FileUploader buttonOnly="true" change="onUploadFront" buttonText="Front Image"/>
+                <u:FileUploader buttonOnly="true" change="onUploadRear" buttonText="Rear Image"/>
+            </HBox>
+    
+
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout"> 
+                <Input id="DescId" placeholder="Enter Description" type="Text"/>
+                 <TextArea id="AppraiseValue" placeholder="Enter Appraise  Value" rows="3" ariaLabelledBy="TextAreaLabel"/>
+                 <Input id="Price" placeholder="Enter Price"  type="Number"/>
+                 <Input id="category" placeholder="Enter Category" type="Text"/>
+                 <Button text="Submit" press="onPostAppraisal" icon="" />
+            </f:SimpleForm>
+            <!-- <footer>
+                  <Bar>
+                    <contentMiddle>
+                      <Button text="Submit" press="onPressLogout" icon="" />
+                    </contentMiddle>
+                  </Bar>
+            </footer> -->
+        </Page>
+    </App>
+</mvc:View>

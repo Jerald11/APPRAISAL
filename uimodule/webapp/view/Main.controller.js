@@ -26,9 +26,7 @@ sap.ui.define([
       that.oModel.setSizeLimit(100000);
       that.getView().setModel(this.oModel,"oModel");
       that.getView().byId("ShelluserName").setText(localStorage.getItem("RFIDuserName"));
-      that.onDashBoard();
-
-
+      that.oModel.refresh();
       var oView = that.getView();
         oView.addEventDelegate({
           onAfterHide: function(evt) {
@@ -55,13 +53,10 @@ sap.ui.define([
 
     initialize: function(){
       todates = new Date();
-     
+      this.onDashBoard();
       
       },
 
-     
-
-      
     onDashBoard: function(){
       this.router = this.getOwnerComponent().getRouter();
       this.router.navTo("MainDashBoard");
@@ -94,9 +89,16 @@ sap.ui.define([
         }
       },
 
-      onViewInventory: function(){
+      onProduct: function(){
         this.router = this.getOwnerComponent().getRouter();
-        this.router.navTo("ViewInventory");
+        this.router.navTo("Product");
+        this.onMenuButtonPress()
+      },
+
+      
+      onAppraise: function(){
+        this.router = this.getOwnerComponent().getRouter();
+        this.router.navTo("Appraise");
         this.onMenuButtonPress()
       },
 

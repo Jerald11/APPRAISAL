@@ -3,7 +3,7 @@
     xmlns:l="sap.ui.layout"
     xmlns:core="sap.ui.core"
     xmlns:f="sap.ui.layout.form">
-    <Dialog title="User Registeration">
+    <Dialog title="Registeration">
         <content>
             <l:Grid defaultSpan = "L12 M12 S12" width = "auto">
                 <l:content>
@@ -27,48 +27,51 @@
                         <f:formContainers>
                             <f:FormContainer>
                                 <f:formElements>
-                                    <f:FormElement label="First Name">
-                                      <Input id="Fname" type="Text"/>
+                                    <f:FormElement label="Complete Name">
+                                      <Input id="CompleteName" type="Text"/>
                                     </f:FormElement>
 
-                                    <f:FormElement label="Middle Name">
-                                       <Input id="MName" type="Text"/>
+                                    <f:FormElement label="Address">
+                                       <Input id="Address" type="Text"/>
                                     </f:FormElement>
 
-                                    <f:FormElement label="Last Name">
-                                        <Input id="LName" type="Text"/>
+                                    <f:FormElement label="Billing Address">
+                                        <Input id="BillingAddress" type="Text"/>
+                                    </f:FormElement>
+
+                                    <f:FormElement label="City">
+                                        <Input id="City" type="Text"/>
+                                    </f:FormElement>
+
+                                    <f:FormElement label="Email Address">
+                                        <Input id="Email" type="Email"/>
+                                    </f:FormElement>
+                                      
+                                    <f:FormElement label="ZipCode">
+                                        <Input id="ZipCode" type="Text"/>
+                                    </f:FormElement>
+
+                                    <f:FormElement label="Contact No">
+                                        <Input id="ContactNo" type="Text"/>
                                     </f:FormElement>
 
                                     <f:FormElement label="User Name">
-                                        <Input id="UserName" type="Text"/>
+                                        <Input id="Username" type="Text"/>
                                     </f:FormElement>
 
-                                    <f:FormElement label="Password">
-                                        <Input id="oPassword" type="Password"/>
+                                     <f:FormElement label="User Type">
+                                        <Select id="UserType" change="onChangeType" required="true">
+                                            <items>
+                                                <core:Item text="" key=""/>
+                                                <core:Item text="Seller" key="Seller"/>
+                                                <core:Item text="Customer" key="Customer"/>
+                                                <core:Item text="Administrator" key="Administrator"/>
+                                            </items>
+                                        </Select>
                                     </f:FormElement>
 
-                                     <f:FormElement label="Email Address">
-                                        <Input id="EmailAdd" type="Email"/>
-                                    </f:FormElement>
-
-                                    <f:FormElement label="House No">
-                                        <Input id="oHouseNo" type="Text"/>
-                                    </f:FormElement>
-
-                                    <f:FormElement label="Street">
-                                        <Input id="oStreet" type="Text"/>
-                                    </f:FormElement>
-
-                                     <f:FormElement label="Brgy">
-                                        <Input id="oBrgy" type="Text"/>
-                                    </f:FormElement>
-
-                                      <f:FormElement label="City">
-                                        <Input id="oCity" type="Text"/>
-                                    </f:FormElement>
-
-                                    <f:FormElement label="Province">
-                                        <Input id="oProvince" type="Text"/>
+                                    <f:FormElement id="lblLicenseKey" label="License Key" visible="false">
+                                        <Input id="LicenseKey" type="Text"/>
                                     </f:FormElement>
 
                                 </f:formElements>

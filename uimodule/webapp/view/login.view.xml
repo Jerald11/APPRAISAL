@@ -7,7 +7,7 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:tnt="sap.tnt"
 	xmlns:html="http://www.w3.org/1999/xhtml">
-  <App id="idAppControl" >
+  <App id="app">
    <Page showHeader="false">
       <content>
         <VBox fitContainer="true" justifyContent="Center" alignItems="Center" alignContent="Center">
@@ -15,11 +15,12 @@
             <Image src="./resources/img/logo.png"/>
           </items>
           <items>
-            <Input id="Username" placeholder="User Name"></Input>
+            <Input id="Username" change="onChangeUserName" placeholder="User Name"></Input>
             <Input id="Password" placeholder="Password" type="Password"></Input>
-            <Button press="onMain" width="11rem" text="Login" type="Emphasized" icon="sap-icon://visits"/>
+            <Button press="onPressLogin" width="11rem" text="Login" type="Emphasized" icon="sap-icon://visits"/>
              <Link id="linkid" text="No Account? Register Here" press="onPressRegister" />
-            <Label text="V 0.1"/>
+             <Link text="Change Password" press="onShowForgotPass" />
+            <!-- <Label text="V 0.1"/> -->
           </items>
         </VBox>
       </content>

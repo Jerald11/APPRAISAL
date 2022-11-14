@@ -1,0 +1,25 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog id="sViewProdId" title="">
+        <content>
+            <HBox justifyContent="Center" renderType="Bare">
+                <Panel id="carouselContainer" height="400px">
+                    <Carousel class="sapUiContentPadding" loop="true">
+                        <Image id="STopImageIdFrag"/>
+                        <Image id="SFrontImageIdFrag"/>
+                        <Image id="SRearImageIdFrag"/>
+                    </Carousel>
+                </Panel>
+            </HBox>
+        </content>
+        <beginButton>
+            <Button text="Close" icon="sap-icon://sys-cancel" press="onCloseProduct" type="Reject"/>
+        </beginButton>
+        <endButton>
+            <Button text="Order" icon="sap-icon://accept" press="onOrderedItem" type="Accept" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

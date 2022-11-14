@@ -26,12 +26,17 @@
 
         <tnt:SideNavigation expanded="true" selectedKey="" itemSelect="onItemSelect">
           <tnt:NavigationList>
-            <tnt:NavigationListItem expanded="false" select="onViewInventory" text="Inventory" icon="sap-icon://write-new-document"/>
-            <tnt:NavigationListItem expanded="false" select="" text="Product" icon="sap-icon://add-product"/>
-            <tnt:NavigationListItem expanded="false" select="" text="Users" icon="sap-icon://account"/>
-            <tnt:NavigationListItem  expanded="false" select="onRootItemSelect" text="Reports" icon="sap-icon://bar-chart"/>
-            <tnt:NavigationListItem expanded="false" select="" text="Settings" icon="sap-icon://action-settings"/>
-            <tnt:NavigationListItem  expanded="false" select="onChangePassword" text="Change Password" icon="sap-icon://two-keys"/>
+            <!-- <tnt:NavigationListItem expanded="false" select="onViewInventory" text="Inventory" icon="sap-icon://write-new-document"/> -->
+            <tnt:NavigationListItem expanded="false" select="onProduct" text="Product" icon="sap-icon://add-product"/>
+            <tnt:NavigationListItem expanded="false" select="onAppraise" text="Appraise" icon="sap-icon://collaborate"/>
+          
+            <tnt:NavigationListItem expanded="false" select="" text="Sale" icon="sap-icon://collections-insight">
+              <tnt:NavigationListItem text="Orders" select=""/>
+              <tnt:NavigationListItem text="Bid" select=""/>
+            </tnt:NavigationListItem>
+  
+             <tnt:NavigationListItem expanded="false" select="" text="Delivery" icon="sap-icon://shipping-status"/>
+            <!-- <tnt:NavigationListItem  expanded="false" select="onRootItemSelect" text="Reports" icon="sap-icon://bar-chart"/> -->
             <tnt:NavigationListItem text="Logout"  icon="sap-icon://log" select="onLogout"/>
           </tnt:NavigationList>
         </tnt:SideNavigation>
